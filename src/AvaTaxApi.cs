@@ -11438,27 +11438,6 @@ namespace Avalara.AvaTax.RestClient
 
 
         /// <summary>
-        /// Evaluates a transaction against a set of direct-to-consumer shipping regulations.
-        /// </summary>
-        /// <remarks>
-        /// This method has moved to /shipment/verify
-        /// </remarks>
-        /// Swagger Name: AvaTaxBeverageClient
-        /// <param name="companyCode">The company code of the company that recorded the transaction</param>
-        /// <param name="transactionCode">The transaction code to retrieve</param>
-        /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public ShippingVerifyResult decrecatedVerifyShipment(String companyCode, String transactionCode, String documentType)
-        {
-            var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shippingverify");
-            path.ApplyField("companyCode", companyCode);
-            path.ApplyField("transactionCode", transactionCode);
-            path.AddQuery("documentType", documentType);
-            _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID,"");
-            return RestCall<ShippingVerifyResult>("GET", path, null);
-        }
-
-
-        /// <summary>
         /// Removes the transaction from consideration when evaluating regulations that span multiple transactions.
         /// </summary>
         /// <remarks>
@@ -11468,14 +11447,14 @@ namespace Avalara.AvaTax.RestClient
         /// <param name="companyCode">The company code of the company that recorded the transaction</param>
         /// <param name="transactionCode">The transaction code to retrieve</param>
         /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public FileResult deregisterShipment(String companyCode, String transactionCode, String documentType)
+        public void deregisterShipment(String companyCode, String transactionCode, String documentType)
         {
             var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shipment/registration");
             path.ApplyField("companyCode", companyCode);
             path.ApplyField("transactionCode", transactionCode);
             path.AddQuery("documentType", documentType);
             _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID,"");
-            return RestCallFile("DELETE", path, null);
+            RestCallString("DELETE", path, null);
         }
 
 
@@ -11489,14 +11468,14 @@ namespace Avalara.AvaTax.RestClient
         /// <param name="companyCode">The company code of the company that recorded the transaction</param>
         /// <param name="transactionCode">The transaction code to retrieve</param>
         /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public FileResult registerShipment(String companyCode, String transactionCode, String documentType)
+        public void registerShipment(String companyCode, String transactionCode, String documentType)
         {
             var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shipment/registration");
             path.ApplyField("companyCode", companyCode);
             path.ApplyField("transactionCode", transactionCode);
             path.AddQuery("documentType", documentType);
             _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID,"");
-            return RestCallFile("PUT", path, null);
+            RestCallString("PUT", path, null);
         }
 
 
@@ -23305,28 +23284,6 @@ namespace Avalara.AvaTax.RestClient
 
         /// Swagger Name: AvaTaxBeverageClient
         /// <summary>
-        /// Evaluates a transaction against a set of direct-to-consumer shipping regulations.;
-        /// </summary>
-        /// <remarks>
-        /// This method has moved to /shipment/verify;
-        /// </remarks>
-		
-        /// <param name="companyCode">The company code of the company that recorded the transaction</param>
-        /// <param name="transactionCode">The transaction code to retrieve</param>
-        /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public async Task<ShippingVerifyResult> decrecatedVerifyShipmentAsync(String companyCode, String transactionCode, String documentType)
-        {
-            var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shippingverify");
-            path.ApplyField("companyCode", companyCode);
-            path.ApplyField("transactionCode", transactionCode);
-            path.AddQuery("documentType", documentType);
-            _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID ,"");
-            return await RestCallAsync<ShippingVerifyResult>("GET", path, null).ConfigureAwait(false);
-        }
-
-
-        /// Swagger Name: AvaTaxBeverageClient
-        /// <summary>
         /// Removes the transaction from consideration when evaluating regulations that span multiple transactions.;
         /// </summary>
         /// <remarks>
@@ -23336,14 +23293,14 @@ namespace Avalara.AvaTax.RestClient
         /// <param name="companyCode">The company code of the company that recorded the transaction</param>
         /// <param name="transactionCode">The transaction code to retrieve</param>
         /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public async Task<FileResult> deregisterShipmentAsync(String companyCode, String transactionCode, String documentType)
+        public async Task deregisterShipmentAsync(String companyCode, String transactionCode, String documentType)
         {
             var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shipment/registration");
             path.ApplyField("companyCode", companyCode);
             path.ApplyField("transactionCode", transactionCode);
             path.AddQuery("documentType", documentType);
             _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID ,"");
-            return await RestCallAsync<FileResult>("DELETE", path, null).ConfigureAwait(false);
+            await RestCallStringAsync("DELETE", path, null).ConfigureAwait(false);
         }
 
 
@@ -23358,14 +23315,14 @@ namespace Avalara.AvaTax.RestClient
         /// <param name="companyCode">The company code of the company that recorded the transaction</param>
         /// <param name="transactionCode">The transaction code to retrieve</param>
         /// <param name="documentType">(Optional): The document type of the transaction to operate on. If omitted, defaults to "SalesInvoice"</param>
-        public async Task<FileResult> registerShipmentAsync(String companyCode, String transactionCode, String documentType)
+        public async Task registerShipmentAsync(String companyCode, String transactionCode, String documentType)
         {
             var path = new AvaTaxPath("/api/v2/companies/{companyCode}/transactions/{transactionCode}/shipment/registration");
             path.ApplyField("companyCode", companyCode);
             path.ApplyField("transactionCode", transactionCode);
             path.AddQuery("documentType", documentType);
             _clientHeaders[Constants.AVALARA_CLIENT_HEADER]=string.Format(ClientID ,"");
-            return await RestCallAsync<FileResult>("PUT", path, null).ConfigureAwait(false);
+            await RestCallStringAsync("PUT", path, null).ConfigureAwait(false);
         }
 
 
