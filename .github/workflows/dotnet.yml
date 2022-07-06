@@ -9,9 +9,21 @@ on:
 jobs:
   build:
 
-    runs-on: mcr.microsoft.com/dotnet/framework/sdk:4.7.1
+    runs-on: windows-latest
 
     steps:
+    
+    - uses: actions/checkout@v2
+    
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+    
+    - name: Navigate to Workspace
+      run: cd $GITHUB_WORKSPACE    
+    
     - name: Restore dependencies
       run: |
         dotnet restore Avalara.AvaTax.Net20.sln
