@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: mcr.microsoft.com/dotnet/framework/sdk:4.8
+    runs-on: mcr.microsoft.com/dotnet/framework/sdk:4.7.1
 
     steps:
     - name: Restore dependencies
