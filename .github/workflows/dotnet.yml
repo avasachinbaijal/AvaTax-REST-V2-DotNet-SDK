@@ -1,0 +1,28 @@
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: mcr.microsoft.com/dotnet/framework/sdk:4.8
+
+    steps:
+    - name: Restore dependencies
+      run: |
+        dotnet restore Avalara.AvaTax.Net20.sln
+        dotnet restore Avalara.AvaTax.net45.sln
+        dotnet restore Avalara.AvaTax.netstandard11.sln
+    - name: Build
+      run: |
+          "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe" Avalara.AvaTax.Net20.sln /p:platform="Any CPU" /t:Build /p:Configuration="Release"
+          "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe" Avalara.AvaTax.net45.sln /p:platform="Any CPU" /t:Build /p:Configuration="Release"
+          "C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe" Avalara.AvaTax.net461.sln /p:platform="Any CPU" /t:Build /p:Configuration="Release"
+          dotnet build Avalara.AvaTax.netstandard11.sln -c Release
+          dotnet build Avalara.AvaTax.netstandard20.sln -c Release
+        
+   
